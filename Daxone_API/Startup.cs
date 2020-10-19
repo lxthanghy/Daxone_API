@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Daxone_API.Models;
+using Daxone_API.Services.Client.ProductCategories;
+using Daxone_API.Services.Client.Suppliers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +30,9 @@ namespace Daxone_API
         {
             services.AddDbContext<DaxoneDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DaxoneDB")));
+            services.AddTransient<ISupplierService, SupplierService>();
+            services.AddTransient<IProductCategoryService, ProductCategoryService>();
+
             services.AddControllers();
         }
 
