@@ -17,7 +17,7 @@ namespace Daxone_API.Controllers
 
         public ProductCategoriesController(IProductCategoryService productCategoryService)
         {
-            _productCategoryService = pro
+            _productCategoryService = productCategoryService;
         }
 
         // GET: api/<ProductCategoriesController>
