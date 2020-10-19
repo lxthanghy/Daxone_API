@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daxone_API", "Daxone_API\Daxone_API.csproj", "{EC2F21B0-7480-4189-87FE-D6AF24B2A7B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC2F21B0-7480-4189-87FE-D6AF24B2A7B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC2F21B0-7480-4189-87FE-D6AF24B2A7B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC2F21B0-7480-4189-87FE-D6AF24B2A7B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC2F21B0-7480-4189-87FE-D6AF24B2A7B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D4EDDE4-BB5C-495D-B66D-1B133A793FD2}
+	EndGlobalSection
+EndGlobal
