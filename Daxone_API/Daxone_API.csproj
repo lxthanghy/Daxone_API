@@ -20,7 +20,7 @@
     <Folder Include="Services\Admin\" />
     <Folder Include="Services\Client\OrderDeatails\" />
     <Folder Include="Services\Client\Orders\" />
-    <Folder Include="ViewModels\" />
+    <Folder Include="ViewModels\Admin\" />
   </ItemGroup>
 
 

@@ -24,15 +24,18 @@ namespace Daxone_API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var data = await _productService.GetAll();
+            var data = await _productService.GetProductHome();
             return Ok(data);
         }
 
         // GET api/<ProductsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> GetById(long id)
         {
-            return "value";
+            var product = await _productService.GetById(id);
+            if (product == null)
+                return NotFound();
+            return Ok(product);
         }
 
         // POST api/<ProductsController>
