@@ -20,7 +20,6 @@
     <Folder Include="Services\Admin\" />
     <Folder Include="Services\Client\OrderDeatails\" />
     <Folder Include="Services\Client\Orders\" />
-    <Folder Include="Services\Client\Products\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 
