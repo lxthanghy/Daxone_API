@@ -1,5 +1,5 @@
 ﻿using Daxone_API.Models;
-using Daxone_API.ViewModels.Client;
+using Daxone_API.ViewModels.Client.Product;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

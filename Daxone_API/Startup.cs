@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Daxone_API.Models;
+using Daxone_API.Services.Client.OrderDetails;
+using Daxone_API.Services.Client.Orders;
 using Daxone_API.Services.Client.ProductCategories;
 using Daxone_API.Services.Client.Products;
 using Daxone_API.Services.Client.Suppliers;
@@ -34,6 +36,8 @@ namespace Daxone_API
             services.AddTransient<ISupplierService, SupplierService>();
             services.AddTransient<IProductCategoryService, ProductCategoryService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IOrderDetailService, OrderDetailService>();
 
             services.AddControllers();
         }

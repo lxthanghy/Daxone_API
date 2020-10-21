@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Daxone_API.ViewModels.Client
+namespace Daxone_API.ViewModels.Client.Product
 {
     public class ProductDetailViewModel
     {
