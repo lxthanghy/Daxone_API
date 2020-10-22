@@ -8,6 +8,7 @@ using Daxone_API.Services.Client.Orders;
 using Daxone_API.Services.Client.ProductCategories;
 using Daxone_API.Services.Client.Products;
 using Daxone_API.Services.Client.Suppliers;
+using Daxone_API.Services.Client.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +39,7 @@ namespace Daxone_API
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IOrderDetailService, OrderDetailService>();
+            services.AddTransient<IUserService, UserService>();
 
             services.AddControllers();
         }
