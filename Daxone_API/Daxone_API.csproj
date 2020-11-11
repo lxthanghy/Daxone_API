@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Admin\" />
+    <Folder Include="ViewModels\Admin\Order\" />
   </ItemGroup>
 
 

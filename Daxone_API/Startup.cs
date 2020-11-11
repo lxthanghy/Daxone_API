@@ -18,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Daxone_API.Services.Admin.Products;
 
 namespace Daxone_API
 {
@@ -39,6 +40,7 @@ namespace Daxone_API
             services.AddTransient<ISupplierServiceAdmin, SupplierServiceAdmin>();
             services.AddTransient<IProductCategoryService, ProductCategoryService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IProductServiceAdmin, ProductServiceAdmin>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IOrderDetailService, OrderDetailService>();
             services.AddTransient<IUserService, UserService>();

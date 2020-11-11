@@ -20,17 +20,24 @@ namespace Daxone_API.Services.Admin.Suppliers
 
         public async Task<int> Add(AddSupplierViewModel addSupplierViewModel)
         {
-            Supplier supplier = new Supplier()
+            try
             {
-                Name = addSupplierViewModel.Name,
-                Address = addSupplierViewModel.Address,
-                Email = addSupplierViewModel.Email,
-                Phone = addSupplierViewModel.Phone,
-                Status = addSupplierViewModel.Status
-            };
-            _daxoneDBContext.Suppliers.Add(supplier);
-            int res = await _daxoneDBContext.SaveChangesAsync();
-            return res;
+                Supplier supplier = new Supplier()
+                {
+                    Name = addSupplierViewModel.Name,
+                    Address = addSupplierViewModel.Address,
+                    Email = addSupplierViewModel.Email,
+                    Phone = addSupplierViewModel.Phone,
+                    Status = addSupplierViewModel.Status
+                };
+                _daxoneDBContext.Suppliers.Add(supplier);
+                int res = await _daxoneDBContext.SaveChangesAsync();
+                return res;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
         }
 
         public async Task<int> Delete(long id)
@@ -75,8 +82,34 @@ namespace Daxone_API.Services.Admin.Suppliers
                 paginationViewModel.Page = page;
                 paginationViewModel.PageSize = pageSize;
                 paginationViewModel.TotalItems = await _daxoneDBContext.Suppliers.Where(x => x.Name.ToLower().IndexOf(nameSearch) >= 0).CountAsync();
+                var model = _daxoneDBContext.Suppliers.ToList();
+                string sortByName = "";
+                if (data.ContainsKey("sortByName") && !string.IsNullOrEmpty(data["sortByName"].ToString().Trim()))
+                    sortByName = data["sortByName"].ToString().Trim().ToLower();
+                switch (sortByName)
+                {
+                    case "asc":
+                        model = model.OrderBy(x => x.Name).ToList();
+                        break;
 
-                paginationViewModel.Data = _daxoneDBContext.Suppliers.Where(x => x.Name.ToLower().IndexOf(nameSearch) >= 0).Skip((page - 1) * pageSize).Take(pageSize);
+                    case "desc":
+                        model = model.OrderByDescending(x => x.Name).ToList();
+                        break;
+                }
+                string sortByCreatedDate = "";
+                if (data.ContainsKey("sortByCreatedDate") && !string.IsNullOrEmpty(data["sortByCreatedDate"].ToString().Trim()))
+                    sortByCreatedDate = data["sortByCreatedDate"].ToString().Trim().ToLower();
+                switch (sortByCreatedDate)
+                {
+                    case "asc":
+                        model = model.OrderBy(x => x.CreatedDate).ToList();
+                        break;
+
+                    case "desc":
+                        model = model.OrderByDescending(x => x.CreatedDate).ToList();
+                        break;
+                }
+                paginationViewModel.Data = model.Where(x => x.Name.ToLower().IndexOf(nameSearch) >= 0).Skip((page - 1) * pageSize).Take(pageSize);
             }
             catch (Exception ex)
             {
