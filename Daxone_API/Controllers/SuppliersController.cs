@@ -61,7 +61,7 @@ namespace Daxone_API.Controllers
         public async Task<IActionResult> Put(int id, [FromBody] Supplier supplier)
         {
             var res = await _supplierServiceAdmin.Update(id, supplier);
-            if (res == 0) return BadRequest();
+            if (res == -1) return BadRequest();
             return Ok(res);
         }
 

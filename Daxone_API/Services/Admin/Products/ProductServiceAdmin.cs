@@ -53,6 +53,92 @@ namespace Daxone_API.Services.Admin.Products
             }
         }
 
+        public async Task<int> Delete(long id)
+        {
+            try
+            {
+                Product product = await _daxoneDBContext.Products.FindAsync(id);
+                if (product == null) return -1;
+                _daxoneDBContext.Products.Remove(product);
+                await _daxoneDBContext.SaveChangesAsync();
+                return 1;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+        }
+
+        public async Task<DetailProductViewModel> Detail(long id)
+        {
+            try
+            {
+                Product product = await _daxoneDBContext.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.Id == id).FirstOrDefaultAsync();
+                DetailProductViewModel detailProductViewModel = new DetailProductViewModel()
+                {
+                    Name = product.Name,
+                    ImageUrl = product.ImageUrl,
+                    MoreImage = product.MoreImage,
+                    Description = product.Description,
+                    Price = product.Price,
+                    Quantity = product.Quantity,
+                    CategoryName = product.Category.Name,
+                    SupplierName = product.Supplier.Name,
+                    PromotionPrice = product.PromotionPrice,
+                    Warranty = product.Warranty,
+                    Frame = product.Frame,
+                    Rims = product.Rims,
+                    Tires = product.Tires,
+                    Weight = product.Weight,
+                    WeightLimit = product.WeightLimit,
+                    Status = product.Status,
+                    ShowOnHome = product.ShowOnHome,
+                    CreatedDate = product.CreatedDate,
+                    ViewCount = product.ViewCount
+                };
+                return detailProductViewModel;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<UpdateProductViewModel> Edit(long id)
+        {
+            try
+            {
+                Product product = await _daxoneDBContext.Products.FindAsync(id);
+                if (product == null) return null;
+                UpdateProductViewModel updateProductViewModel = new UpdateProductViewModel()
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    ImageUrl = product.ImageUrl,
+                    Description = product.Description,
+                    Price = product.Price,
+                    Quantity = product.Quantity,
+                    CategoryId = product.CategoryId,
+                    SupplierId = product.SupplierId,
+                    PromotionPrice = product.PromotionPrice,
+                    Warranty = product.Warranty,
+                    Frame = product.Frame,
+                    Rims = product.Rims,
+                    Tires = product.Tires,
+                    Weight = product.Weight,
+                    WeightLimit = product.WeightLimit,
+                    Status = product.Status,
+                    ShowOnHome = product.ShowOnHome
+                };
+
+                return updateProductViewModel;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public IQueryable<ProductCategorySelectViewModel> getDataSelectProductCategory()
         {
             try
@@ -160,6 +246,37 @@ namespace Daxone_API.Services.Admin.Products
                 throw new Exception(ex.Message);
             }
             return paginationViewModel;
+        }
+
+        public async Task<int> Update(long id, UpdateProductViewModel updateProductViewModel)
+        {
+            try
+            {
+                Product product = await _daxoneDBContext.Products.FindAsync(id);
+                if (product == null) return -1;
+                product.Name = updateProductViewModel.Name;
+                product.ImageUrl = updateProductViewModel.ImageUrl;
+                product.Description = updateProductViewModel.Description;
+                product.Price = updateProductViewModel.Price;
+                product.Quantity = updateProductViewModel.Quantity;
+                product.CategoryId = updateProductViewModel.CategoryId;
+                product.SupplierId = updateProductViewModel.SupplierId;
+                product.PromotionPrice = updateProductViewModel.PromotionPrice;
+                product.Warranty = updateProductViewModel.Warranty;
+                product.Frame = updateProductViewModel.Frame;
+                product.Rims = updateProductViewModel.Rims;
+                product.Tires = updateProductViewModel.Tires;
+                product.Weight = updateProductViewModel.Weight;
+                product.WeightLimit = updateProductViewModel.WeightLimit;
+                product.Status = updateProductViewModel.Status;
+                product.ShowOnHome = updateProductViewModel.ShowOnHome;
+                await _daxoneDBContext.SaveChangesAsync();
+                return 1;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
         }
     }
 }

@@ -53,6 +53,24 @@ namespace Daxone_API.Controllers
             return Ok(product);
         }
 
+        [HttpGet("{id}/detail")]
+        public async Task<IActionResult> Detail(long id)
+        {
+            var product = await _productServiceAdmin.Detail(id);
+            if (product == null)
+                return NotFound();
+            return Ok(product);
+        }
+
+        [HttpGet("{id}/edit")]
+        public async Task<IActionResult> Edit(long id)
+        {
+            var product = await _productServiceAdmin.Edit(id);
+            if (product == null)
+                return NotFound();
+            return Ok(product);
+        }
+
         [HttpGet("data-select-supplier")]
         public IActionResult GetDataSelectSupplier()
         {
@@ -88,14 +106,30 @@ namespace Daxone_API.Controllers
 
         // PUT api/<ProductsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateProductViewModel updateProductViewModel)
         {
+            if (updateProductViewModel.ImageUrl != null)
+            {
+                var arrData = updateProductViewModel.ImageUrl.Split(';');
+                if (arrData.Length == 3)
+                {
+                    var savePath = $"{arrData[0]}";
+                    updateProductViewModel.ImageUrl = $"{savePath}";
+                    SaveFileFromBase64String(savePath, arrData[2]);
+                }
+            }
+            var res = await _productServiceAdmin.Update(id, updateProductViewModel);
+            if (res == -1) return BadRequest();
+            return Ok(res);
         }
 
         // DELETE api/<ProductsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            var res = await _productServiceAdmin.Delete(id);
+            if (res == -1) return BadRequest();
+            return Ok(res);
         }
 
         public string SaveFileFromBase64String(string RelativePathFileName, string dataFromBase64String)
