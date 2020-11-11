@@ -8,6 +8,7 @@ using Daxone_API.Services.Client.Orders;
 using Daxone_API.Services.Client.ProductCategories;
 using Daxone_API.Services.Client.Products;
 using Daxone_API.Services.Client.Suppliers;
+using Daxone_API.Services.Admin.Suppliers;
 using Daxone_API.Services.Client.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,12 +36,12 @@ namespace Daxone_API
             services.AddDbContext<DaxoneDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DaxoneDB")));
             services.AddTransient<ISupplierService, SupplierService>();
+            services.AddTransient<ISupplierServiceAdmin, SupplierServiceAdmin>();
             services.AddTransient<IProductCategoryService, ProductCategoryService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IOrderDetailService, OrderDetailService>();
             services.AddTransient<IUserService, UserService>();
-
             services.AddControllers();
         }
 

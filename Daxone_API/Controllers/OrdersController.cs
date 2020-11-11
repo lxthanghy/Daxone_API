@@ -8,8 +8,6 @@ using Daxone_API.Services.Client.Orders;
 using Daxone_API.ViewModels.Client.Order;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Daxone_API.Controllers
 {
     [Route("api/[controller]")]
@@ -43,8 +41,7 @@ namespace Daxone_API.Controllers
         public async Task<IActionResult> AddOrder([FromBody] AddOrderViewModel orderViewModel)
         {
             var res = await _orderService.Add(orderViewModel);
-            if (res == 0)
-                return BadRequest();
+            if (res == 0) return BadRequest();
             return Ok(res);
         }
 
